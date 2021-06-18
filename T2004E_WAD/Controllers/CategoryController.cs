@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using T2004E_WAD.Models;
 namespace T2004E_WAD.Controllers
 {
     public class CategoryController : Controller
@@ -11,7 +11,16 @@ namespace T2004E_WAD.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            return View();
+            // truyen theo ViewData
+            ViewData["Message"] = "Hello World!";
+            ViewData["CurrentTime"] = DateTime.Now;
+            // truyen theo ViewBag
+            ViewBag.Message = "Hello world!";
+            ViewBag.CurrentTime = DateTime.Now;
+
+            Category cat = new Category() { Name="Watch",Image="Watch.png",Description="Watch description" };
+
+            return View(cat);
         }
 
         // GET: Category/Details/5
@@ -28,20 +37,41 @@ namespace T2004E_WAD.Controllers
 
         // POST: Category/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Category category)
         {
             try
             {
                 // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction("Index");
+                }
 
-                return RedirectToAction("Index");
+                return View(category);
             }
             catch
             {
-                return View();
+                return View(category);
             }
         }
+        [HttpPost]
+        public ActionResult CreateCategory(Category category)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction("Index");
+                }
 
+                return View(category);
+            }
+            catch
+            {
+                return View(category);
+            }
+        }
         // GET: Category/Edit/5
         public ActionResult Edit(int id)
         {

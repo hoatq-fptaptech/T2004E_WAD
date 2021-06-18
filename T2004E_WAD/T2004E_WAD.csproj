@@ -126,6 +126,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2133,10 +2134,10 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Aside.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Partial\" />
   </ItemGroup>
   <ItemGroup>
