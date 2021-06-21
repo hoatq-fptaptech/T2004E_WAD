@@ -1,63 +1,46 @@
-﻿
-@{
-    @model T2004E_WAD.Models.Category
+﻿@model IEnumerable<T2004E_WAD.Models.Category>
 
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
-<h1>
-    @ViewData["Message"]
-</h1>
-<h2>Thời gian: @ViewData["CurrentTime"]</h2>
 
-<h2>Dùng với dạng ViewBag</h2>
-<h3>@ViewBag.Message</h3>
-<p>@ViewBag.CurrentTime</p>
-@{
-    // day la noi viet code C#
-    var products = new string[] { "Laptop", "PC", "Telephone" };
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
 }
-<ul>
-    @foreach (var product in products)
-    {
-        <li>Product: @product</li>
 
-    }
-</ul>
-<a href="~/Home/About">About us</a>
-<br />
-@Html.ActionLink("Home", "Index", "Home")
-
-<h2>Start Form Login</h2>
-@{Html.BeginForm("Create", "Category");}
-@Html.Label("Email")
-@Html.TextBox("email")
-<br />
-@Html.Label("Password")
-@Html.Password("password")
-<br />
-@Html.DropDownList("city", new SelectList(new[] { "Hà Nội", "Sài Gòn" }), "Chọn tỉnh/thành phố")
-<br />
-@Html.CheckBox("Remember")@Html.Label("Remember me")
-<br />
-@Html.RadioButton("gender", "male", true) Nam
-<br />
-@Html.RadioButton("gender", "female") Nữ
-<button type="submit">Submit</button>
-@{Html.EndForm();}
-
-<h3>Thông tin danh mục</h3>
-<h3>Tên: @Model.Name </h3>
-<h3>Ảnh: @Model.Image </h3>
-<h3>Mô tả: @Model.Description </h3>
-
-<h2>Form Nhập dữ liệu cho Category</h2>
-@{ Html.BeginForm();}
-@Html.ValidationSummary(true)
-@Html.LabelFor(Model => Model.Name)
-@Html.EditorFor(Model => Model.Name)
-@Html.LabelFor(Model => Model.Image)
-@Html.EditorFor(Model => Model.Image)
-@Html.LabelFor(Model => Model.Description)
-@Html.TextAreaFor(Model => Model.Description)
-@{ Html.EndForm();}
+</table>

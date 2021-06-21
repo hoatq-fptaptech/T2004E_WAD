@@ -1,35 +1,52 @@
-﻿
+﻿@model T2004E_WAD.Models.Category
+
 @{
-    @model T2004E_WAD.Models.Category
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
-<h2>Form Nhập dữ liệu cho Category</h2>
-@{ Html.BeginForm();}
-<div class="form-horizontal">
-    @Html.ValidationSummary(true)
-    <div class="form-group">
-        @Html.LabelFor(Model => Model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(Model => Model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(Model => Model.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(Model => Model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(Model => Model.Image, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(Model => Model.Image, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(Model => Model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(Model => Model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(Model => Model.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <button type="submit">Submit</button>
 
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Category</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
 </div>
-@{ Html.EndForm();}

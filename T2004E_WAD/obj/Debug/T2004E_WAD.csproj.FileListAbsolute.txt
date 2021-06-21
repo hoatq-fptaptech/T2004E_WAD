@@ -72,8 +72,11 @@ C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\System.Web.WebPages.Razor.xml
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\Newtonsoft.Json.xml
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\Antlr3.Runtime.pdb
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Debug\T2004E_WAD.csprojAssemblyReference.cache
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Debug\T2004E_WAD.csproj.CoreCompileInputs.cache
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Debug\T2004E_WAD.csproj.CopyComplete
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Debug\T2004E_WAD.dll
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Debug\T2004E_WAD.pdb
+C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.dll
+C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.SqlServer.dll
+C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.xml
+C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.SqlServer.xml

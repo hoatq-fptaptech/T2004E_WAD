@@ -1,32 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using T2004E_WAD.Context;
 using T2004E_WAD.Models;
+
 namespace T2004E_WAD.Controllers
 {
     public class CategoryController : Controller
     {
+        private DataContext db = new DataContext();
+
         // GET: Category
         public ActionResult Index()
         {
-            // truyen theo ViewData
-            ViewData["Message"] = "Hello World!";
-            ViewData["CurrentTime"] = DateTime.Now;
-            // truyen theo ViewBag
-            ViewBag.Message = "Hello world!";
-            ViewBag.CurrentTime = DateTime.Now;
-
-            Category cat = new Category() { Name="Watch",Image="Watch.png",Description="Watch description" };
-
-            return View(cat);
+            return View(db.Categories.ToList());
         }
 
         // GET: Category/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Category category = db.Categories.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            return View(category);
         }
 
         // GET: Category/Create
@@ -36,84 +43,86 @@ namespace T2004E_WAD.Controllers
         }
 
         // POST: Category/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Category category)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name,Image,Description")] Category category)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-                if (ModelState.IsValid)
-                {
-                    return RedirectToAction("Index");
-                }
+                db.Categories.Add(category);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-                return View(category);
-            }
-            catch
-            {
-                return View(category);
-            }
+            return View(category);
         }
-        [HttpPost]
-        public ActionResult CreateCategory(Category category)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-                if (ModelState.IsValid)
-                {
-                    return RedirectToAction("Index");
-                }
 
-                return View(category);
-            }
-            catch
-            {
-                return View(category);
-            }
-        }
         // GET: Category/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Category category = db.Categories.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            return View(category);
         }
 
         // POST: Category/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Image,Description")] Category category)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(category).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(category);
         }
 
         // GET: Category/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Category category = db.Categories.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            return View(category);
         }
 
         // POST: Category/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Category category = db.Categories.Find(id);
+            db.Categories.Remove(category);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }
