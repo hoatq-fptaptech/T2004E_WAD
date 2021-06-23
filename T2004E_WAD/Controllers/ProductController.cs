@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using T2004E_WAD.Context;
 using T2004E_WAD.Models;
+using System.Dynamic;
 
 namespace T2004E_WAD.Controllers
 {
@@ -16,9 +17,45 @@ namespace T2004E_WAD.Controllers
         private DataContext db = new DataContext();
 
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string search,string sortOrder,string categoryId)
         {
-            return View(db.Products.ToList());
+            ViewBag.CategoryId = 0;
+            string sort = !String.IsNullOrEmpty(sortOrder) ? sortOrder : "asc";
+            /*// cach 1: dung thang dbSet -- su dung duoc relationship
+            if (!String.IsNullOrEmpty(search))
+            {
+                var products = db.Products.Where(p => p.Name.Contains(search)).OrderBy(p=>p.Name).ToList(); // OrderBy : asc  OrderByDescending: desc
+                return View(products);
+            }
+            return View(db.Products.OrderBy(p=>p.Name).ToList());
+
+*/
+            // cach 2 dung db Raw - tim trong 1 bang
+            var products = from p in db.Products select p;
+            if (!String.IsNullOrEmpty(search))
+            {
+                products = products.Where(p => p.Name.Contains(search));
+            }
+            switch (sort)
+            {
+                case "asc": products = products.OrderBy(p => p.Name);break;
+                case "desc": products = products.OrderByDescending(p => p.Name);break;
+            }
+            // loc theo category
+            if(!String.IsNullOrEmpty(categoryId))
+            {
+                var catId = Convert.ToInt32(categoryId);
+                products = products.Where(p => p.CategoryID == catId);
+                ViewBag.CategoryId = catId;
+            }
+                
+
+            var categories = db.Categories.ToList();
+            dynamic data = new ExpandoObject();
+            data.Products = products;
+            data.Categories = categories;
+            return View(data);
+
         }
 
         // GET: Product/Details/5

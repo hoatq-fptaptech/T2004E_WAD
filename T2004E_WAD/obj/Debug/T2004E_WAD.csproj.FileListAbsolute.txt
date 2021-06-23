@@ -80,3 +80,4 @@ C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.dll
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.SqlServer.dll
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.xml
 C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\bin\EntityFramework.SqlServer.xml
+C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Debug\T2004E_WAD.csprojAssemblyReference.cache

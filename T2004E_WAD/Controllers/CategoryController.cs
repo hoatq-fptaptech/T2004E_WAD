@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using T2004E_WAD.Context;
 using T2004E_WAD.Models;
-
+using System.Dynamic;
 namespace T2004E_WAD.Controllers
 {
     public class CategoryController : Controller
@@ -33,7 +33,10 @@ namespace T2004E_WAD.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+            dynamic data = new ExpandoObject();
+            data.Category = category;
+            data.Products = db.Products.Where(p => p.CategoryID == category.Id).ToList();
+            return View(data);
         }
 
         // GET: Category/Create
