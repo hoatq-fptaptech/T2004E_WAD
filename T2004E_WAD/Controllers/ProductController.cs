@@ -17,7 +17,7 @@ namespace T2004E_WAD.Controllers
         private DataContext db = new DataContext();
 
         // GET: Product
-        public ActionResult Index(string search,string sortOrder,string categoryId)
+        public ActionResult Index(string search, string sortOrder, string categoryId)
         {
             ViewBag.CategoryId = 0;
             string sort = !String.IsNullOrEmpty(sortOrder) ? sortOrder : "asc";
@@ -38,17 +38,17 @@ namespace T2004E_WAD.Controllers
             }
             switch (sort)
             {
-                case "asc": products = products.OrderBy(p => p.Name);break;
-                case "desc": products = products.OrderByDescending(p => p.Name);break;
+                case "asc": products = products.OrderBy(p => p.Name); break;
+                case "desc": products = products.OrderByDescending(p => p.Name); break;
             }
             // loc theo category
-            if(!String.IsNullOrEmpty(categoryId))
+            if (!String.IsNullOrEmpty(categoryId))
             {
                 var catId = Convert.ToInt32(categoryId);
                 products = products.Where(p => p.CategoryID == catId);
                 ViewBag.CategoryId = catId;
             }
-                
+
 
             var categories = db.Categories.ToList();
             dynamic data = new ExpandoObject();
@@ -71,6 +71,38 @@ namespace T2004E_WAD.Controllers
                 return HttpNotFound();
             }
             return View(product);
+        }
+
+        public ActionResult AddToCart(int? id, int? qty)
+        {
+            try
+            {
+                Product product = db.Products.Find(id);
+                if(product == null)
+                {
+                    return HttpNotFound();
+                }
+                // them vao gio hang
+                CartItem item = new CartItem(product, (int)qty);
+                // lay gio hang tu Session
+                Cart cart = (Cart)Session["Cart"];
+                if(cart == null)
+                {
+                    Customer customer = new Customer("Nguyễn Văn An", "0987654321", "Số 8 Tôn Thất Thuyết");
+                    cart = new Cart();
+                    cart.Customer = customer;
+                }
+                cart.AddToCart(item);
+            }catch(Exception e)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Cart");
+        }
+
+        public ActionResult Cart()
+        {
+            return View();
         }
 
         // GET: Product/Create
