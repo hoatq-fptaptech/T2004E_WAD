@@ -49,6 +49,7 @@ namespace T2004E_WAD.Models
                 if(item.Product.Id == id)
                 {
                     CartItems.Remove(item);
+                    CalculateGrandTotal();
                     return;
                 }
             }
