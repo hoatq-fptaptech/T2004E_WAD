@@ -93,6 +93,7 @@ namespace T2004E_WAD.Controllers
                     cart.Customer = customer;
                 }
                 cart.AddToCart(item);
+                Session["cart"] = cart;// theem session
             }catch(Exception e)
             {
                 return HttpNotFound();
@@ -103,6 +104,26 @@ namespace T2004E_WAD.Controllers
         public ActionResult Cart()
         {
             return View();
+        }
+
+        public ActionResult RemoveItem(int? id)
+        {
+            try
+            {
+             
+                Cart cart = (Cart)Session["Cart"];
+                if (cart == null)
+                {
+                    return HttpNotFound();
+                }
+                cart.RemoveItem((int)id);
+                Session["cart"] = cart;// theem session
+            }
+            catch (Exception e)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Cart");
         }
 
         // GET: Product/Create

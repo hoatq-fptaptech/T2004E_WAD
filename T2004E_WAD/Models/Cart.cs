@@ -42,6 +42,18 @@ namespace T2004E_WAD.Models
             return true;
         }
 
+        public void RemoveItem(int id)
+        {
+            foreach(var item in CartItems)
+            {
+                if(item.Product.Id == id)
+                {
+                    CartItems.Remove(item);
+                    return;
+                }
+            }
+        }
+
         public int CheckExists(CartItem item)
         {
             for(int i = 0; i < CartItems.Count; i++)
