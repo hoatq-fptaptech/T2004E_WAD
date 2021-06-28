@@ -13,7 +13,9 @@ namespace T2004E_WAD.Models
         public int Price { get; set; }
         public string Description { get; set; }
         public int CategoryID { get; set; } // khoa ngoai
+        public int BrandID { get; set; }
 
         public virtual Category Category { get; set; }
+        public virtual Brand Brand { get; set; }
     }
 }
