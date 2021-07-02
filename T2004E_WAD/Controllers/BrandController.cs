@@ -11,11 +11,13 @@ using T2004E_WAD.Models;
 
 namespace T2004E_WAD.Controllers
 {
+    [RoutePrefix("admin")]
     public class BrandController : Controller
     {
         private DataContext db = new DataContext();
 
         // GET: Brand
+        [Route]
         public ActionResult Index()
         {
             return View(db.Brands.ToList());
