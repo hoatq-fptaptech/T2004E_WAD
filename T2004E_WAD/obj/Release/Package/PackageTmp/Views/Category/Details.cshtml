@@ -1,0 +1,90 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+    T2004E_WAD.Models.Category category = Model.Category;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @category.Name
+        </dd>
+
+        <dt>
+            Image
+        </dt>
+
+        <dd>
+            @category.Image
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @category.Description
+        </dd>
+
+    </dl>
+</div>
+<table class="table">
+    <tr>
+
+        <th>
+            Name
+        </th>
+
+        <th>
+            Image
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Description
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (T2004E_WAD.Models.Product item in Model.Products)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit","Product", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", "Product", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", "Product", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = category.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

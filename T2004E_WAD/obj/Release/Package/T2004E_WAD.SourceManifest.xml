@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Aptech\SEM3\T2004E\T2004E_WAD\T2004E_WAD\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

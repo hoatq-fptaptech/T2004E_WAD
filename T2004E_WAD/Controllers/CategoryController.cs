@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using T2004E_WAD.Context;
 using T2004E_WAD.Models;
 using System.Dynamic;
+using System.IO;
 namespace T2004E_WAD.Controllers
 {
     public class CategoryController : Controller
@@ -50,8 +51,19 @@ namespace T2004E_WAD.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Image,Description")] Category category)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Category category,HttpPostedFileBase Image)
         {
+            String categoryImage = "default.png";
+            // upload file len thu muc Uploads
+            // luu ten file vao categoryImage
+            if(Image != null)
+            {
+                string fileName = Path.GetFileName(Image.FileName);
+                string path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
+                Image.SaveAs(path);// luu file xong
+                categoryImage = "Uploads/" + fileName;
+            }
+            category.Image = categoryImage;
             if (ModelState.IsValid)
             {
                 db.Categories.Add(category);

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="T2004E_WAD-Web.config Connection String" description="T2004E_WAD Connection String used in web.config by the application to access the database." defaultValue="Data Source=tcp:t2004e-waddbserver.database.windows.net,1433;Initial Catalog=T2004E_WAD_db;User Id=demosql;Password=t2004e123" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Aptech\\SEM3\\T2004E\\T2004E_WAD\\T2004E_WAD\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='T2004E_WAD']/@connectionString" />
+  </parameter>
+</parameters>
